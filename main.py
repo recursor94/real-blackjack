@@ -13,7 +13,15 @@ def main():
 def calculate_hand_val(hand):
     value = 0
     for card in hand:
-        value = value + card.get_rank()
+        num_aces = 0
+        if card.get_card_name() == 'Ace':
+            num_aces += 1
+        else:
+            value = value + card.get_rank()
+        if value + num_aces * 11 > 21:
+            value += num_aces
+        else:
+            value += num_aces * 11
     return value
 def show_all_cards_in_hand(hand):
     for card in hand:
@@ -28,7 +36,7 @@ def game():
     decision = None
 
     while decision != 3:
-        print
+        print #For new line
         decision = input('Press 1 to hit, 2 to stand, 3 to exit: ')
         if(decision == 1):
             player_hand.append(hit(deck))
